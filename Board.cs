@@ -3,10 +3,80 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Markup;
 
-namespace Pokemon_game
+namespace pokemonGame
 {
     internal class Board
     {
+        private int _rows;
+        private int _cols;
+        List<List<Cell>> _cells = new List<List<Cell>> { };
+
+
+        public Board(int rows, int cols) 
+        {   
+            this.Rows = rows;
+            this.Cols = cols;
+
+            for (int i = 0; i < _cols; i++) {
+                _cells.Add(new List<Cell> { });
+            }
+
+            Random random = new Random();
+
+            for (int i = 0; i < _rows; i++) 
+            {
+                for (int j = 0; j < _cols; j++)
+                { 
+                    Cell cell = new Cell(i, j);
+
+                    _cells[i].Add(cell);
+                }
+            }
+        }
+
+
+        public int Rows {
+            get { return _rows; }
+            set {
+                if (value.GetType == GetType(int))
+                {
+                    if (value > 0 && value <= 1000)
+                    {
+                        _rows = value;
+                    }
+                    else 
+                    {
+                        throw new RwrongValueException();
+                    }
+                } else {                     
+                    throw new RwrongValueException();
+                }
+
+            }
+        }
+
+        public int Cols {
+            get { return _cols; }
+
+            set {
+                if (value.GetType() == GetType(int)) {
+                    if (value <= 1000 && value > 0)
+                    {
+                        _cols = value;
+                    } else {
+                        throw new RwrongValueException();
+                    }
+
+
+                } else { 
+                    throw new RwrongValueException();
+                }
+            }
+            
+        }
+
+
     }
 }
