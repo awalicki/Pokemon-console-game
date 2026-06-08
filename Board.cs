@@ -11,22 +11,23 @@ namespace pokemonGame
     {
         private int _rows;
         private int _cols;
-        List<List<Cell>> _cells = new List<List<Cell>> { };
+        private List<List<Cell>> _cells;
 
+        private int[,] _playersPlaces;
 
         public Board(int rows, int cols) 
         {   
             this.Rows = rows;
             this.Cols = cols;
 
-            for (int i = 0; i < _cols; i++) {
-                _cells.Add(new List<Cell> { });
-            }
+            _cells = new List<List<Cell>> { };
 
             Random random = new Random();
 
             for (int i = 0; i < _rows; i++) 
             {
+                _cells.Add(new List<Cell> { });
+
                 for (int j = 0; j < _cols; j++)
                 { 
                     Cell cell = new Cell(i, j);
@@ -34,6 +35,18 @@ namespace pokemonGame
                     _cells[i].Add(cell);
                 }
             }
+        }
+
+
+        public int[,] PlayerPlaces {
+            get { return _playersPlaces; }
+            set { _playersPlaces = value; }
+        }
+
+        public Cell this[int r, int c]{
+            get { return _cells[r][c]; }
+            set { _cells[r][c] = value; }
+                
         }
 
 
