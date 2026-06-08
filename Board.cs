@@ -40,20 +40,14 @@ namespace pokemonGame
         public int Rows {
             get { return _rows; }
             set {
-                if (value.GetType == GetType(int))
+                if (value > 0 && value <= 1000)
                 {
-                    if (value > 0 && value <= 1000)
-                    {
-                        _rows = value;
-                    }
-                    else 
-                    {
-                        throw new RwrongValueException();
-                    }
-                } else {                     
+                    _rows = value;
+                }
+                else 
+                {
                     throw new RwrongValueException();
                 }
-
             }
         }
 
@@ -61,22 +55,13 @@ namespace pokemonGame
             get { return _cols; }
 
             set {
-                if (value.GetType() == GetType(int)) {
-                    if (value <= 1000 && value > 0)
-                    {
-                        _cols = value;
-                    } else {
-                        throw new RwrongValueException();
-                    }
-
-
-                } else { 
+                if (value <= 1000 && value > 0)
+                {
+                    _cols = value;
+                } else {
                     throw new RwrongValueException();
                 }
             }
-            
         }
-
-
     }
 }
