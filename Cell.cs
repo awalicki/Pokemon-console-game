@@ -21,18 +21,18 @@ namespace pokemonGame
         public Cell(int x, int y) 
         {
             Random random = new Random();
-            this._x = x;
-            this._y = y;
+            this.X = x;
+            this.Y = y;
             int power = random.Next(1, 10000);
             if (power % 10 == 0)
             {
-                _potion = true;
-                _pokemonPower = 0;
+                this.Potion = true;
+                this.PokemonPower = 0;
             }
             else 
             { 
-                _potion = false;
-                _pokemonPower = power;
+                this.Potion = false;
+                this.PokemonPower = power;
             }
             
         }
