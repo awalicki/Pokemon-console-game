@@ -38,10 +38,17 @@ namespace pokemonGame
         }
 
 
-        public int[,] PlayerPlaces {
-            get { return _playersPlaces; }
-            set { _playersPlaces = value; }
+
+        public int[] getPlayerPlace(int playerNum) { 
+            return new int[] { _playersPlaces[playerNum,0], _playersPlaces[playerNum,1] };
         }
+
+        public void setPlayerPlace(int playerNum, int x, int y)
+        {
+            _playersPlaces[playerNum, 0] = x;
+            _playersPlaces[playerNum, 1] = y;
+        }
+
 
         public Cell this[int r, int c]{
             get { return _cells[r][c]; }
