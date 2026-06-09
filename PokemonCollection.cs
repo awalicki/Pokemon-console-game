@@ -15,7 +15,6 @@ namespace Pokemon_game
         public PokemonCollection(int[] pp) {
             _pokemons = new List<Pokemon>();
             _upgrades = 0;
-            _playerPlace = pp;
         }
 
         public Pokemon this[int n] {
@@ -23,10 +22,5 @@ namespace Pokemon_game
             set { _pokemons[n] = value; }
         }
 
-        public int[] PlaerPlace
-        {
-            get { return _playerPlace; }
-            set { _playerPlace = value; }
-        }
     }
 }

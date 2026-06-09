@@ -23,8 +23,6 @@ namespace Pokemon_game
 
         }
 
-        public 
-
         
     }
 }

@@ -24,12 +24,19 @@ namespace Pokemon_game
         }
 
 
-        public static void displayBoard(Board board) { 
+        public static void displayBoard(Board board) {
             for (int i = 0; i < board.Rows; i++)
             {
                 for (int j = 0; j < board.Cols; j++)
                 {
-                    Console.Write("[] ");
+                    if (board.getPlayerPlace(1)[0] == i && board.getPlayerPlace(1)[1] == j)
+                    {
+                        Console.Write("P1 ");
+                    }
+                    else if (board.getPlayerPlace(2)[0] == i && board.getPlayerPlace(2)[1] == j)
+                    {
+                        Console.Write("P2 ");
+                    }
                 }
                 Console.WriteLine("");
             }
