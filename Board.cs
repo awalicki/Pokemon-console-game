@@ -43,10 +43,10 @@ namespace pokemonGame
             return new int[] { _playersPlaces[playerNum,0], _playersPlaces[playerNum,1] };
         }
 
-        public void setPlayerPlace(int playerNum, int x, int y)
+        public void setPlayerPlace(int playerNum, int xDiff, int yDiff)
         {
-            _playersPlaces[playerNum, 0] = x;
-            _playersPlaces[playerNum, 1] = y;
+            _playersPlaces[playerNum, 0] = _playersPlaces[playerNum, 0] + xDiff;
+            _playersPlaces[playerNum, 1] = _playersPlaces[playerNum, 1] + yDiff;
         }
 
 
