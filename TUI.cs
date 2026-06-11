@@ -41,5 +41,15 @@ namespace Pokemon_game
                 Console.WriteLine("");
             }
         }
+
+        public static List<string> askForDirection(int avdist) {
+            Console.WriteLine($"Podaj ilość pól, o które chcesz sie przemieścić (maks {avdist}):");
+            string numberOfTiles = Console.ReadLine();
+            Console.WriteLine($"Podaj kierunek w którym chcesz sie przemieściś:\n ↑ - n \n ↓ - s \n → - e \n ← - w ");
+            string direction = Console.ReadLine();
+            List<string> result = new List<string> { numberOfTiles, direction};
+            return result;
+        }
     }
 }
+  

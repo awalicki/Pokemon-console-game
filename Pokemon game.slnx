@@ -2,5 +2,5 @@
   <Folder Name="/Elementy rozwiązania/">
     <File Path=".gitignore" />
   </Folder>
-  <Project Path="Pokemon game.csproj" />
+  <Project Path="Pokemon game.csproj" Id="62a02d03-8797-4140-b6c0-fd4d1bcb8aef" />
 </Solution>

@@ -23,6 +23,14 @@ namespace Pokemon_game
 
         }
 
+        public void movePlayers(Board board) {
+            int player1AvailableDistance = DIce.rollTheDice();
+            int player2availableDistance = DIce.rollTheDice();
+
+
+            
+        }
+
         
     }
 }
