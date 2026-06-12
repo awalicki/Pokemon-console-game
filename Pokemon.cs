@@ -29,14 +29,14 @@ namespace Pokemon_game
         }
 
         public void upgrade() {
-            if (this.Power * 1.1 > 10000)
+            if (this.Power * 2 > 10000)
             {
                 this.Power = 10000;
-                Console.WriteLine("Osiągnięto maks  level pokemona");
+                Console.WriteLine("You reach max level of your pokemon");
             }
             else
             {
-                this.Power = this.Power * 1.1;
+                this.Power = this.Power * 2;
 
             }
         }

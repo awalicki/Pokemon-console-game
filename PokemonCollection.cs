@@ -17,9 +17,18 @@ namespace Pokemon_game
             _upgrades = 0;
         }
 
+        public int Upgrades{
+            get { return _upgrades;  }
+            set { _upgrades = value; }
+        }
+
         public Pokemon this[int n] {
             get { return _pokemons[n]; }
             set { _pokemons[n] = value; }
+        }
+
+        public List<Pokemon> getPokemons() { 
+            return _pokemons;
         }
 
         public void addPokemon(Pokemon pokemon) {

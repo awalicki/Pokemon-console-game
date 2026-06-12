@@ -43,19 +43,30 @@ namespace Pokemon_game
                 }
                 Console.WriteLine("[ ]");
             }
+            Console.WriteLine("\n\n");
         }
 
         public static List<string> askForDirection(int avdist) {
             Console.WriteLine($"Write the number of tiles you wont to move yourself (max {avdist}):");
             string numberOfTiles = Console.ReadLine();
-            Console.WriteLine($"Write the directiont of your move:\n ↑ - n \n ↓ - s \n → - e \n ← - w ");
+            Console.WriteLine($"Write the directiont of your move:\n ↑ - n \n ↓ - s \n → - e \n ← - w \n\n");
             string direction = Console.ReadLine();
             List<string> result = new List<string> { numberOfTiles, direction};
             return result;
         }
 
         public static void gotNewPokemon(double power) {
-            Console.WriteLine($"You just got a new pokemon!! It's power is {power}");
+            Console.WriteLine($"You just got a new pokemon!! It's power is {power}\n");
+        }
+
+        public static void showPlayerCollection(PokemonCollection pc) {
+            Console.Write($"You have {pc.getPokemons().Count} : ");
+
+            for (int i = 0; i < pc.getPokemons().Count; i++)
+            {
+                Console.Write($"{i + 1} - {pc[i]}, ");
+            }
+            Console.WriteLine($"\n And {pc.Upgrades} upgrades.\n\n");
         }
     }
 }
