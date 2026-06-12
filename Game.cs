@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -49,14 +50,23 @@ namespace Pokemon_game
                 if (pMoves[i][1] == "w")
                     _board.setPlayerPlace(0, (int.Parse(pMoves[i][0]) * -1), 0);
 
-                _player1.addPokemon( _board[ _board.getPlayerPlace(i)[0], _board.getPlayerPlace(i)[1]].Pokemon);
-                TUI.gotNewPokemon( _board[_board.getPlayerPlace(i)[0], _board.getPlayerPlace(i)[1]].Pokemon.Power );
+                Pokemon pika = _board[_board.getPlayerPlace(i)[0], _board.getPlayerPlace(i)[1]].Pokemon;
+
+                _player1.addPokemon(pika);
+                pika = null;
+                TUI.gotNewPokemon(pika.Power);
             }
-
-
-
         }
 
+        public bool checkForFight(Board board) { 
+            int distanceX = Math.Abs(_board.getPlayerPlace(1)[0] - _board.getPlayerPlace(0)[0]);
+            int distanceY = Math.Abs(_board.getPlayerPlace(1)[1] - _board.getPlayerPlace(0)[1]);
+
+            if (distanceX > 1 || distanceY > 1) {
+                return false;
+            }
+            return true;
+        }
 
     }
 }

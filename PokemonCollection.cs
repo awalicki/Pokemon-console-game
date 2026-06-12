@@ -25,7 +25,14 @@ namespace Pokemon_game
         public void addPokemon(Pokemon pokemon) {
             if (pokemon != null)
             {
-                _pokemons.Add(pokemon);
+                if (pokemon.Power == 0)
+                {
+                    _upgrades++;
+                }
+                else
+                {
+                    _pokemons.Add(pokemon);
+                }
             }
         }
 

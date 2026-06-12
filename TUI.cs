@@ -29,7 +29,10 @@ namespace Pokemon_game
             {
                 for (int j = 0; j < board.Cols; j++)
                 {
-                    if (board.getPlayerPlace(1)[0] == i && board.getPlayerPlace(1)[1] == j)
+                    if (board.getPlayerPlace(1)[0] == i && board.getPlayerPlace(1)[1] == j && board.getPlayerPlace(2)[0] == i && board.getPlayerPlace(2)[1] == j) {
+                        Console.Write("BTH");
+                    }
+                    else if (board.getPlayerPlace(1)[0] == i && board.getPlayerPlace(1)[1] == j)
                     {
                         Console.Write("P1 ");
                     }
@@ -38,7 +41,7 @@ namespace Pokemon_game
                         Console.Write("P2 ");
                     }
                 }
-                Console.WriteLine("");
+                Console.WriteLine("[ ]");
             }
         }
 
@@ -52,7 +55,7 @@ namespace Pokemon_game
         }
 
         public static void gotNewPokemon(double power) {
-            Console.WriteLine($"You just got a new pokemon!! Its power is {power}");
+            Console.WriteLine($"You just got a new pokemon!! It's power is {power}");
         }
     }
 }
