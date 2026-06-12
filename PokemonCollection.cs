@@ -22,5 +22,12 @@ namespace Pokemon_game
             set { _pokemons[n] = value; }
         }
 
+        public void addPokemon(Pokemon pokemon) {
+            if (pokemon != null)
+            {
+                _pokemons.Add(pokemon);
+            }
+        }
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Pokemon_game;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,7 @@ namespace pokemonGame
         private int _y;
 
         //If there is no pokemon on this field this value will be set to 0
-        private double _pokemonPower;
+        private Pokemon _pokemon;
 
 
         private bool _potion;
@@ -20,21 +21,19 @@ namespace pokemonGame
 
         public Cell(int x, int y) 
         {
-            Random random = new Random();
             this.X = x;
             this.Y = y;
-            int power = random.Next(1, 10000);
-            if (power % 10 == 0)
+            _pokemon = new Pokemon();
+            if (_pokemon.Power % 10 == 0)
             {
                 this.Potion = true;
-                this.PokemonPower = 0;
+                this._pokemon = null;
             }
-            else 
-            { 
-                this.Potion = false;
-                this.PokemonPower = power;
-            }
-            
+        }
+
+        public Pokemon Pokemon { 
+            get { return _pokemon; } 
+            set { _pokemon = value; }
         }
 
         public int X {
@@ -42,14 +41,10 @@ namespace pokemonGame
             set { _x = value; }
         }
 
-        public int Y {
-            get { return _y;  }
+        public int Y
+        {
+            get { return _y; }
             set { _y = value; }
-        }
-
-        public double PokemonPower {
-            get { return _pokemonPower; }
-            set { _pokemonPower = value; }
         }
 
         public bool Potion { 

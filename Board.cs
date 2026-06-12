@@ -22,8 +22,6 @@ namespace pokemonGame
 
             _cells = new List<List<Cell>> { };
 
-            Random random = new Random();
-
             for (int i = 0; i < _rows; i++) 
             {
                 _cells.Add(new List<Cell> { });

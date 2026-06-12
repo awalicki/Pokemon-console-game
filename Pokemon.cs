@@ -10,6 +10,13 @@ namespace Pokemon_game
     {
         private double _power;
 
+
+        public Pokemon() { 
+            Random random = new Random();
+
+            Power = random.Next(1, 10000);
+        }
+
         public double Power {
             get { return _power; }
             set

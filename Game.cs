@@ -48,7 +48,10 @@ namespace Pokemon_game
 
                 if (pMoves[i][1] == "w")
                     _board.setPlayerPlace(0, (int.Parse(pMoves[i][0]) * -1), 0);
+
+                _player1.addPokemon( _board[ _board.getPlayerPlace(i)[0], _board.getPlayerPlace(i)[1]].Pokemon);
             }
+
 
 
         }
