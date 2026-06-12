@@ -50,6 +50,7 @@ namespace Pokemon_game
                     _board.setPlayerPlace(0, (int.Parse(pMoves[i][0]) * -1), 0);
 
                 _player1.addPokemon( _board[ _board.getPlayerPlace(i)[0], _board.getPlayerPlace(i)[1]].Pokemon);
+                TUI.gotNewPokemon( _board[_board.getPlayerPlace(i)[0], _board.getPlayerPlace(i)[1]].Pokemon.Power );
             }
 
 

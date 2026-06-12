@@ -13,11 +13,11 @@ namespace Pokemon_game
         public static int[] askForBoardSize() {
             int[] result = new int[2];
 
-            Console.WriteLine("Podaj długość tablicy: ");
+            Console.WriteLine("Write the lenght of the array: ");
             result[0] = int.Parse(Console.ReadLine());
 
 
-            Console.WriteLine("Podaj szerokość tablicy: ");
+            Console.WriteLine("Write the width of the array: ");
             result[1] = int.Parse(Console.ReadLine());
 
             return result;
@@ -43,12 +43,16 @@ namespace Pokemon_game
         }
 
         public static List<string> askForDirection(int avdist) {
-            Console.WriteLine($"Podaj ilość pól, o które chcesz sie przemieścić (maks {avdist}):");
+            Console.WriteLine($"Write the number of tiles you wont to move yourself (max {avdist}):");
             string numberOfTiles = Console.ReadLine();
-            Console.WriteLine($"Podaj kierunek w którym chcesz sie przemieściś:\n ↑ - n \n ↓ - s \n → - e \n ← - w ");
+            Console.WriteLine($"Write the directiont of your move:\n ↑ - n \n ↓ - s \n → - e \n ← - w ");
             string direction = Console.ReadLine();
             List<string> result = new List<string> { numberOfTiles, direction};
             return result;
+        }
+
+        public static void gotNewPokemon(double power) {
+            Console.WriteLine($"You just got a new pokemon!! Its power is {power}");
         }
     }
 }
