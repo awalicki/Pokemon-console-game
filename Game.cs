@@ -18,8 +18,8 @@ namespace Pokemon_game
             int[] ar = TUI.askForBoardSize();
             _board = new Board(ar[1], ar[2]);
 
-            _player1 = new PokemonCollection(new int[] { ar[1], 0 });
-            _player2 = new PokemonCollection(new int[] { 0, ar[2] });
+            _player1 = new PokemonCollection();
+            _player2 = new PokemonCollection();
 
         }
 
@@ -27,21 +27,28 @@ namespace Pokemon_game
             int player1AvailableDistance = DIce.rollTheDice();
             int player2availableDistance = DIce.rollTheDice();
 
-            List<string> p1Move = TUI.askForDirection(player1AvailableDistance);
-            List<string> p2Move = TUI.askForDirection(player2availableDistance);
+            //List<string> p1Move = TUI.askForDirection(player1AvailableDistance);
+            //List<string> p2Move = TUI.askForDirection(player2availableDistance);
 
-            if (p1Move[1] == "n")
-                _board.setPlayerPlace(0, 0, int.Parse(p1Move[1]));
+            List<List<string>> pMoves = new List<List<string>>() { 
+                TUI.askForDirection(player1AvailableDistance),
+                TUI.askForDirection(player2availableDistance)
+            };
 
-            if (p1Move[1] == "s")
-                _board.setPlayerPlace(0, 0, (int.Parse(p1Move[1]) * -1));
+            for (int i = 0; i < pMoves.Count; i++)
+            {
+                if (pMoves[i][1] == "n")
+                    _board.setPlayerPlace(0, 0, int.Parse(pMoves[i][0]));
 
-            if (p1Move[1] == "e")
-                _board.setPlayerPlace(0, int.Parse(p1Move[1]), 0);
+                if (pMoves[i][1] == "s")
+                    _board.setPlayerPlace(0, 0, (int.Parse(pMoves[i][0]) * -1));
 
-            if (p1Move[1] == "w")
-                _board.setPlayerPlace(0, (int.Parse(p1Move[1]) * -1), 0);
+                if (pMoves[i][1] == "e")
+                    _board.setPlayerPlace(0, int.Parse(pMoves[i][0]), 0);
 
+                if (pMoves[i][1] == "w")
+                    _board.setPlayerPlace(0, (int.Parse(pMoves[i][0]) * -1), 0);
+            }
 
 
         }

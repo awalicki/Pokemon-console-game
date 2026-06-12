@@ -35,6 +35,8 @@ namespace pokemonGame
                     _cells[i].Add(cell);
                 }
             }
+
+            _playersPlaces = new int[,] { {rows, 0 }, {0, cols } };
         }
 
 

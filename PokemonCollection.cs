@@ -12,7 +12,7 @@ namespace Pokemon_game
         private int _upgrades;
 
 
-        public PokemonCollection(int[] pp) {
+        public PokemonCollection() {
             _pokemons = new List<Pokemon>();
             _upgrades = 0;
         }
