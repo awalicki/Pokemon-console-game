@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -71,6 +72,22 @@ namespace Pokemon_game
             }
             return true;
         }
+
+        public void apiRequest() { 
+            HttpClient httpClient = new HttpClient();
+            
+        }
+
+        public void fight() {
+            if (checkForFight(_board) { 
+                List<Task> tasks = new List<Task>();
+
+            }
+        }
+
+
+
+
 
     }
 }
