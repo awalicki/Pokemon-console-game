@@ -75,7 +75,7 @@ namespace Pokemon_game
 
         public void apiRequest() { 
             HttpClient httpClient = new HttpClient();
-            
+            string url = @"127.0.0.1\api";
         }
 
         public void fight() {
