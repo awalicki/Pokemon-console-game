@@ -68,6 +68,16 @@ namespace Pokemon_game
             }
             Console.WriteLine($"\n And {pc.Upgrades} upgrades.\n\n");
         }
+
+        public int[] choseFighter(PokemonCollection p1, PokemonCollection p2)
+        {
+            showPlayerCollection(p1);
+            Console.WriteLine("Player 1, chose number of pokemon for fight");
+            int result = int.Parse(Console.ReadLine());
+            if (result <= p1.Count && result > 0) {
+                result -= 1;
+            }
+        }
     }
 }
   

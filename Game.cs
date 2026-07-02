@@ -73,17 +73,23 @@ namespace Pokemon_game
             return true;
         }
 
-        public void apiRequest() { 
+        public void apiRequest(double numOfBytes) { 
             HttpClient httpClient = new HttpClient();
-            string url = @"127.0.0.1\api";
+            string url = @"127.0.0.1\api\bytes\{numOfBytes}";
         }
 
-        public void fight() {
-            if (checkForFight(_board) { 
+        public int[] choseFighter(_player1, _plauer2) { 
+            return
+        }
+        public void fight(_player1) {
+            if (checkForFight(_board)) { 
                 List<Task> tasks = new List<Task>();
+                
 
             }
         }
+
+
 
 
 
