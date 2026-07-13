@@ -29,34 +29,38 @@ namespace Pokemon_game
             {
                 for (int j = 0; j < board.Cols; j++)
                 {
-                    if (board.getPlayerPlace(1)[0] == i && board.getPlayerPlace(1)[1] == j && board.getPlayerPlace(2)[0] == i && board.getPlayerPlace(2)[1] == j) {
+                    if (board.getPlayerPlace(0)[0] == i && board.getPlayerPlace(0)[1] == j && board.getPlayerPlace(1)[0] == i && board.getPlayerPlace(1)[1] == j)
+                    {
                         Console.Write("BTH");
                     }
-                    else if (board.getPlayerPlace(1)[0] == i && board.getPlayerPlace(1)[1] == j)
+                    else if (board.getPlayerPlace(0)[0] == i && board.getPlayerPlace(0)[1] == j)
                     {
                         Console.Write("P1 ");
                     }
-                    else if (board.getPlayerPlace(2)[0] == i && board.getPlayerPlace(2)[1] == j)
+                    else if (board.getPlayerPlace(1)[0] == i && board.getPlayerPlace(1)[1] == j)
                     {
                         Console.Write("P2 ");
                     }
+                    else {
+                        Console.Write("[ ]");
+                    }
                 }
-                Console.WriteLine("[ ]");
+                Console.WriteLine("");
             }
             Console.WriteLine("\n\n");
         }
 
-        public static List<string> askForDirection(int avdist) {
-            Console.WriteLine($"Write the number of tiles you wont to move yourself (max {avdist}):");
+        public static List<string> askForDirection(int avdist, int player) {
+            Console.WriteLine($"Player {player}: Write the number of tiles you wont to move yourself (max {avdist}):");
             string numberOfTiles = Console.ReadLine();
-            Console.WriteLine($"Write the directiont of your move:\n ↑ - n \n ↓ - s \n → - e \n ← - w \n\n");
+            Console.WriteLine($"Player {player}: Write the directiont of your move:\n ↑ - n \n ↓ - s \n → - e \n ← - w \n\n");
             string direction = Console.ReadLine();
             List<string> result = new List<string> { numberOfTiles, direction};
             return result;
         }
 
-        public static void gotNewPokemon(double power) {
-            Console.WriteLine($"You just got a new pokemon!! It's power is {power}\n");
+        public static void gotNewPokemon(double power, int player) {
+            Console.WriteLine($"Player {player}: You just got a new pokemon!! It's power is {power}\n");
         }
 
         public static void showPlayerCollection(PokemonCollection pc) {
@@ -64,7 +68,7 @@ namespace Pokemon_game
 
             for (int i = 0; i < pc.getPokemons().Count; i++)
             {
-                Console.Write($"{i + 1} - {pc[i]}, ");
+                Console.Write($"{i + 1} - {pc[i].Power}, ");
             }
             Console.WriteLine($"\n And {pc.Upgrades} upgrades.\n\n");
         }

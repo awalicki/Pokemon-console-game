@@ -8,12 +8,11 @@ namespace Pokemon_game
 {
     internal class Pokemon
     {
+        private static Random random = new Random();
         private double _power;
 
 
         public Pokemon() { 
-            Random random = new Random();
-
             Power = random.Next(1, 10000);
         }
 

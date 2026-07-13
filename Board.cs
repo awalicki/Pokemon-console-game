@@ -34,7 +34,7 @@ namespace pokemonGame
                 }
             }
 
-            _playersPlaces = new int[,] { {rows, 0 }, {0, cols } };
+            _playersPlaces = new int[,] { {rows-1, 0 }, {0, cols-1 } };
         }
 
 

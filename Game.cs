@@ -1,6 +1,7 @@
 ﻿using pokemonGame;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Net.Http;
 using System.Security.Cryptography.X509Certificates;
@@ -15,10 +16,10 @@ namespace Pokemon_game
         private PokemonCollection _player1;
         private PokemonCollection _player2;
 
-        public Game ()
+        public Game()
         {
             int[] ar = TUI.askForBoardSize();
-            _board = new Board(ar[1], ar[2]);
+            _board = new Board(ar[0], ar[1]);
 
             _player1 = new PokemonCollection();
             _player2 = new PokemonCollection();
@@ -32,38 +33,58 @@ namespace Pokemon_game
             //List<string> p1Move = TUI.askForDirection(player1AvailableDistance);
             //List<string> p2Move = TUI.askForDirection(player2availableDistance);
 
-            List<List<string>> pMoves = new List<List<string>>() { 
-                TUI.askForDirection(player1AvailableDistance),
-                TUI.askForDirection(player2availableDistance)
+            List<List<string>> pMoves = new List<List<string>>() {
+                TUI.askForDirection(player1AvailableDistance, 1),
+                TUI.askForDirection(player2availableDistance, 2)
             };
-
             for (int i = 0; i < pMoves.Count; i++)
             {
-                if (pMoves[i][1] == "n")
-                    _board.setPlayerPlace(0, 0, int.Parse(pMoves[i][0]));
+                int tiles = int.Parse(pMoves[i][0]);
+                string direction = pMoves[i][1];
 
-                if (pMoves[i][1] == "s")
-                    _board.setPlayerPlace(0, 0, (int.Parse(pMoves[i][0]) * -1));
+                int xDiff = 0;
+                int yDiff = 0;
 
-                if (pMoves[i][1] == "e")
-                    _board.setPlayerPlace(0, int.Parse(pMoves[i][0]), 0);
+                if (direction == "n") xDiff = -tiles;
+                else if (direction == "s") xDiff = tiles;
+                else if (direction == "e") yDiff = tiles;
+                else if (direction == "w") yDiff = -tiles;
 
-                if (pMoves[i][1] == "w")
-                    _board.setPlayerPlace(0, (int.Parse(pMoves[i][0]) * -1), 0);
+
+                int newX = _board.getPlayerPlace(i)[0] + xDiff;
+                int newY = _board.getPlayerPlace(i)[1] + yDiff;
+
+                if ((newX < 0 || newX >= _board.Rows || newY < 0 || newY >= _board.Cols ) && i == 0)
+                {
+                    Console.WriteLine("Player 1 you cant move abroad the board.");
+                    continue;
+                } else if ((newX < 0 || newX >= _board.Rows || newY < 0 || newY >= _board.Cols) && i == 1)
+                {
+                    Console.WriteLine("Player 2 you cant move abroad the board.");
+                    continue;
+                }
+
+                _board.setPlayerPlace(i, xDiff, yDiff);
 
                 Pokemon pika = _board[_board.getPlayerPlace(i)[0], _board.getPlayerPlace(i)[1]].Pokemon;
-                _player1.addPokemon(pika);
-
-                if (pika != null)
+                if (pika != null && i == 0)
                 {
-                    TUI.gotNewPokemon(pika.Power);
+                    _player1.addPokemon(pika);
+                    TUI.gotNewPokemon(pika.Power, 1);
                 }
+                else if (pika != null)
+                {
+                    _player2.addPokemon(pika);
+                    TUI.gotNewPokemon(pika.Power, 2);
+                }
+
 
                 pika = null;
             }
+
         }
 
-        public bool checkForFight(Board board) { 
+        public bool checkForFight(Board board) {
             int distanceX = Math.Abs(_board.getPlayerPlace(1)[0] - _board.getPlayerPlace(0)[0]);
             int distanceY = Math.Abs(_board.getPlayerPlace(1)[1] - _board.getPlayerPlace(0)[1]);
 
@@ -73,9 +94,9 @@ namespace Pokemon_game
             return true;
         }
 
-        public async Task apiRequest(double numOfBytes) { 
+        public async Task apiRequest(double numOfBytes) {
             HttpClient httpClient = new HttpClient();
-            string url = $"127.0.0.1/api/bytes/{numOfBytes}";
+            string url = $"http://127.0.0.1:5195/api/bytes/{numOfBytes}";
             try
             {
                 HttpResponseMessage response = await httpClient.GetAsync(url);
@@ -83,22 +104,22 @@ namespace Pokemon_game
                 if (response.IsSuccessStatusCode)
                 {
                     Console.WriteLine($"Zakończono pobieranie {(int)numOfBytes} bajtów");
-                    }
+                }
                 else
                 {
                     Console.WriteLine($"Serwer zwrócił błąd: {response.StatusCode}");
-                    }
+                }
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Błąd połączenia: {ex.Message}");
-                }
+            }
         }
 
-        public async void fight(PokemonCollection _player1, PokemonCollection _player2) {
+        public async Task fight(PokemonCollection _player1, PokemonCollection _player2) {
             if (checkForFight(_board))
             {
-                int[] fighters = TUI.chooseFighters(_player1 , _player2);
+                int[] fighters = TUI.chooseFighters(_player1, _player2);
                 List<Task> tasks = new List<Task>
                 {
                     apiRequest(_player1.getPokemons()[fighters[0]].Power),
@@ -106,26 +127,34 @@ namespace Pokemon_game
                 };
 
                 Task firstCompletedTask = await Task.WhenAny(tasks);
-                if (firstCompletedTask == tasks[0])
+                if (firstCompletedTask == tasks[1])
                 {
                     Console.WriteLine("Player's 1 pokemon won");
-                    _player2.removePokemon(fighters[1]);
+                    _player2.removePokemon(fighters[0]);
                 }
-                else if (firstCompletedTask == tasks[1])
+                else if (firstCompletedTask == tasks[0])
                 {
                     Console.WriteLine("Player's 2 pokemon won");
-                    _player2.removePokemon(fighters[0]);
+                    _player1.removePokemon(fighters[0]);
                 }
 
 
             }
         }
 
-
-
-
-
-
+        public void Run()
+        {
+            bool gameRunning = true;
+            while (gameRunning)
+            {
+                TUI.displayBoard(_board);
+                movePlayers(_board);
+                if (checkForFight(_board))
+                {
+                    fight(_player1, _player2);
+                }
+            }
+        }
 
     }
 }
