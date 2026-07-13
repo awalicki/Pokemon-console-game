@@ -71,12 +71,26 @@ namespace Pokemon_game
 
         public int[] choseFighter(PokemonCollection p1, PokemonCollection p2)
         {
+            int[] result = new int[2];
             showPlayerCollection(p1);
             Console.WriteLine("Player 1, chose number of pokemon for fight");
-            int result = int.Parse(Console.ReadLine());
-            if (result <= p1.Count && result > 0) {
-                result -= 1;
+            int pom = int.Parse(Console.ReadLine());
+            if (pom <= p1.getPokemons().Count && pom > 0) {
+                result[0] = pom - 1;
             }
+            Console.WriteLine($"Player 1 chose pokemon number: {pom}.\n");
+
+
+            showPlayerCollection(p2);
+            Console.WriteLine("Player 2, chose number of pokemon for fight");
+            pom = int.Parse(Console.ReadLine());
+            if (pom <= p1.getPokemons().Count && pom > 0)
+            {
+                result[1] = pom - 1;
+            }
+            Console.WriteLine($"Gracz 1 wybrał pokemona numer {pom}.\n");
+
+            return result;
         }
     }
 }
