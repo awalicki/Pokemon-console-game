@@ -69,7 +69,7 @@ namespace Pokemon_game
             Console.WriteLine($"\n And {pc.Upgrades} upgrades.\n\n");
         }
 
-        public int[] choseFighter(PokemonCollection p1, PokemonCollection p2)
+        public static int[] chooseFighters(PokemonCollection p1, PokemonCollection p2)
         {
             int[] result = new int[2];
             showPlayerCollection(p1);
@@ -84,7 +84,7 @@ namespace Pokemon_game
             showPlayerCollection(p2);
             Console.WriteLine("Player 2, chose number of pokemon for fight");
             pom = int.Parse(Console.ReadLine());
-            if (pom <= p1.getPokemons().Count && pom > 0)
+            if (pom <= p2.getPokemons().Count && pom > 0)
             {
                 result[1] = pom - 1;
             }

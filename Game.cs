@@ -73,18 +73,50 @@ namespace Pokemon_game
             return true;
         }
 
-        public void apiRequest(double numOfBytes) { 
+        public async Task apiRequest(double numOfBytes) { 
             HttpClient httpClient = new HttpClient();
-            string url = @"127.0.0.1\api\bytes\{numOfBytes}";
+            string url = $"127.0.0.1/api/bytes/{numOfBytes}";
+            try
+            {
+                HttpResponseMessage response = await httpClient.GetAsync(url);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    Console.WriteLine($"Zakończono pobieranie {(int)numOfBytes} bajtów");
+                    }
+                else
+                {
+                    Console.WriteLine($"Serwer zwrócił błąd: {response.StatusCode}");
+                    }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Błąd połączenia: {ex.Message}");
+                }
         }
 
-        public int[] choseFighter(_player1, _plauer2) { 
-            return
-        }
-        public void fight(_player1) {
-            if (checkForFight(_board)) { 
-                List<Task> tasks = new List<Task>();
-                
+        public async void fight(PokemonCollection _player1, PokemonCollection _player2) {
+            if (checkForFight(_board))
+            {
+                int[] fighters = TUI.chooseFighters(_player1 , _player2);
+                List<Task> tasks = new List<Task>
+                {
+                    apiRequest(_player1.getPokemons()[fighters[0]].Power),
+                    apiRequest(_player2.getPokemons()[fighters[1]].Power)
+                };
+
+                Task firstCompletedTask = await Task.WhenAny(tasks);
+                if (firstCompletedTask == tasks[0])
+                {
+                    Console.WriteLine("Player's 1 pokemon won");
+                    _player2.removePokemon(fighters[1]);
+                }
+                else if (firstCompletedTask == tasks[1])
+                {
+                    Console.WriteLine("Player's 2 pokemon won");
+                    _player2.removePokemon(fighters[0]);
+                }
+
 
             }
         }

@@ -45,5 +45,15 @@ namespace Pokemon_game
             }
         }
 
+        public void removePokemon(int n) {
+            if (n > _pokemons.Count)
+            {
+                throw new Exception();
+            }
+            else {
+                _pokemons.RemoveAt(n);
+            }
+        }
+
     }
 }
