@@ -8,8 +8,8 @@ namespace Pokemon_game
 {
     internal class DIce
     {
+        private static Random random = new Random();
         public static int rollTheDice() { 
-            Random random = new Random();
             return (int)random.Next(1, 6);
         }
     }

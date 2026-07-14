@@ -13,11 +13,11 @@ namespace Pokemon_game
         public static int[] askForBoardSize() {
             int[] result = new int[2];
 
-            Console.WriteLine("Write the lenght of the array: ");
+            Console.WriteLine("Lenght of the board: ");
             result[0] = int.Parse(Console.ReadLine());
 
 
-            Console.WriteLine("Write the width of the array: ");
+            Console.WriteLine("Width of the board: ");
             result[1] = int.Parse(Console.ReadLine());
 
             return result;
@@ -25,6 +25,7 @@ namespace Pokemon_game
 
 
         public static void displayBoard(Board board) {
+            Console.WriteLine("");
             for (int i = 0; i < board.Rows; i++)
             {
                 for (int j = 0; j < board.Cols; j++)
@@ -51,16 +52,25 @@ namespace Pokemon_game
         }
 
         public static List<string> askForDirection(int avdist, int player) {
-            Console.WriteLine($"Player {player}: Write the number of tiles you wont to move yourself (max {avdist}):");
-            string numberOfTiles = Console.ReadLine();
-            Console.WriteLine($"Player {player}: Write the directiont of your move:\n ↑ - n \n ↓ - s \n → - e \n ← - w \n\n");
-            string direction = Console.ReadLine();
+            string numberOfTiles;
+            List<char> availableDirections = new List<char> {'n', 's', 'e', 'w' };
+            string direction;
+            do
+            {
+                Console.WriteLine($"Player {player}: Write the number of tiles you wont to move (max {avdist}):");
+                numberOfTiles = Console.ReadLine();
+            } while (int.Parse( numberOfTiles) < 0 && int.Parse(numberOfTiles) > avdist);
+            do
+            {
+                Console.WriteLine($"Player {player}: Write the directiont of your move:\n ↑ - n \n ↓ - s \n → - e \n ← - w \n\n");
+                direction = Console.ReadLine();
+            } while (!(availableDirections.Contains(char.Parse(direction))));
             List<string> result = new List<string> { numberOfTiles, direction};
             return result;
         }
 
         public static void gotNewPokemon(double power, int player) {
-            Console.WriteLine($"Player {player}: You just got a new pokemon!! It's power is {power}\n");
+            Console.WriteLine($"Player {player}: You just got a new pokemon!! It's power is {power}");
         }
 
         public static void showPlayerCollection(PokemonCollection pc) {
@@ -77,7 +87,7 @@ namespace Pokemon_game
         {
             int[] result = new int[2];
             showPlayerCollection(p1);
-            Console.WriteLine("Player 1, chose number of pokemon for fight");
+            Console.WriteLine("Player 1, choose the number of pokemon for the fight");
             int pom = int.Parse(Console.ReadLine());
             if (pom <= p1.getPokemons().Count && pom > 0) {
                 result[0] = pom - 1;
@@ -86,13 +96,13 @@ namespace Pokemon_game
 
 
             showPlayerCollection(p2);
-            Console.WriteLine("Player 2, chose number of pokemon for fight");
+            Console.WriteLine("Player 2,  choose the number of pokemon for the fight");
             pom = int.Parse(Console.ReadLine());
             if (pom <= p2.getPokemons().Count && pom > 0)
             {
                 result[1] = pom - 1;
             }
-            Console.WriteLine($"Gracz 1 wybrał pokemona numer {pom}.\n");
+            Console.WriteLine($"Player 2 chose pokemon number {pom}.\n");
 
             return result;
         }

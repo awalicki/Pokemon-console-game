@@ -64,6 +64,8 @@ namespace Pokemon_game
                     continue;
                 }
 
+                Console.WriteLine("");
+
                 _board.setPlayerPlace(i, xDiff, yDiff);
 
                 Pokemon pika = _board[_board.getPlayerPlace(i)[0], _board.getPlayerPlace(i)[1]].Pokemon;
@@ -77,6 +79,8 @@ namespace Pokemon_game
                     _player2.addPokemon(pika);
                     TUI.gotNewPokemon(pika.Power, 2);
                 }
+
+                Console.WriteLine();
 
 
                 pika = null;
